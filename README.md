@@ -332,6 +332,91 @@ while  True:
     print("checking kernel version ")
     time.sleep(3)
     print("container kernel version is ",k_version)
-    
-    ```
-    
+
+
+```
+
+## Dockerfile 
+
+```
+[ec2-user@ip-172-31-81-232 pyapp]$ cat  Dockerfile 
+FROM  python 
+#  docker engine will receive singal to pull python based docker image from docker hub 
+MAINTAINER  ashutoshh@linux.com 
+# info about dockerfile creator 
+RUN  mkdir  /code
+# it will perform this operation in new image 
+COPY  hello.py  /code/hello.py
+# hello.py is at host system and  /code is in the container that will be created during run time of this file
+CMD  ["python","/code/hello.py"]
+# use of CMD instruction is to define default partent process for my docker image
+
+```
+
+
+## Building first docker images 
+
+```
+[ec2-user@ip-172-31-81-232 pyapp]$ docker build  -t  ashupy:v1   .  
+Sending build context to Docker daemon  3.072kB
+Step 1/5 : FROM  python
+latest: Pulling from library/python
+b9a857cbf04d: Pull complete 
+d557ee20540b: Pull complete 
+3b9ca4f00c2e: Pull complete 
+667fd949ed93: Pull complete 
+4ad46e8a18e5: Pull complete 
+381aea9d4031: Pull complete 
+7eccd8441f11: Pull complete 
+8c148153e894: Pull complete 
+15ad4c058791: Pull complete 
+Digest: sha256:d2f437a450a830c4d3b0b884c3d142866cc879268ebc83f00f74fc4f2d9eaaa1
+Status: Downloaded newer image for python:latest
+ ---> da24d18bf4bf
+Step 2/5 : MAINTAINER  ashutoshh@linux.com
+ ---> Running in b005d02682f2
+Removing intermediate container b005d02682f2
+ ---> c1f1dbb47b6f
+Step 3/5 : RUN  mkdir  /code
+ ---> Running in 0d7541e528ab
+Removing intermediate container 0d7541e528ab
+ ---> b1093dadd3db
+Step 4/5 : COPY  hello.py  /code/hello.py
+ ---> 5d937c260eb2
+Step 5/5 : CMD  ["python","/code/hello.py"]
+ ---> Running in c40bf32dd686
+Removing intermediate container c40bf32dd686
+ ---> a43cba1b1914
+Successfully built a43cba1b1914
+Successfully tagged ashupy:v1
+
+
+```
+
+
+## listing out docker images
+
+```
+[ec2-user@ip-172-31-81-232 pyapp]$ docker  images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+sumeetku            v1                  0e3a523d0507        40 seconds ago      885MB
+rajeev              v1                  7e77afd393fb        2 minutes ago       885MB
+skm                 s1                  cddbde628df3        5 minutes ago       885MB
+ashupy              v1                  a43cba1b1914        5 minutes ago       885MB
+anushapy            v1                  be5aab6b705a        5 minutes ago       885MB
+alpine              latest              7731472c3f2a        3 days ago          5.61MB
+
+```
+
+## first container 
+
+```
+[ec2-user@ip-172-31-81-232 pyapp]$ docker  run  -it -d  --name ashuc3  ashupy:v1  
+39e3b31e43b204c87894d7e9a77a65a81b1f19efb3052253caa1f62856686b22
+[ec2-user@ip-172-31-81-232 pyapp]$ docker  ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+39e3b31e43b2        ashupy:v1           "python /code/hello.…"   10 seconds ago      Up 8 seconds                            ashuc3
+[ec2-user@ip-172-31-81-232 pyapp]$ 
+
+```
+
