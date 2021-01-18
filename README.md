@@ -472,3 +472,77 @@ Ip address must be checked from inside the container only
 
 
 ```
+
+
+## WEb apps to docker images 
+
+### web servers
+
+<img src="webserver.png">
+
+## apache httpd web server 
+
+### open source by apache foundation 
+
+<img src="httpd.png">
+
+## httpd image building 
+
+```
+ec2-user@ip-172-31-81-232 htmlapp]$ docker build  -t  ashuhttpd:v1 -f  httpd.dockerfile  . 
+Sending build context to Docker daemon  304.6kB
+Step 1/5 : FROM  httpd
+latest: Pulling from library/httpd
+a076a628af6f: Already exists 
+e444656f7792: Pull complete 
+0ec35e191b09: Pull complete 
+4aad5d8db1a6: Pull complete 
+eb1da3ea630f: Pull complete 
+Digest: sha256:2fab99fb3b1c7ddfa99d7dc55de8dad0a62dbe3e7c605d78ecbdf2c6c49fd636
+Status: Downloaded newer image for httpd:latest
+ ---> 683a7aad17d3
+Step 2/5 : MAINTAINER  ashutoshh@linux.com
+ ---> Running in b52e1bcc91c0
+Removing intermediate container b52e1bcc91c0
+ ---> 23541ef4a5fb
+Step 3/5 : WORKDIR  /var/www/html/
+ ---> Running in 86c5e497812b
+Removing intermediate container 86c5e4978
+
+```
+
+## another httpd dockerfile 
+
+```
+FROM oraclelinux:8.3
+MAINTAINER ashutoshh
+RUN  yum  install  httpd -y
+WORKDIR  /var/www/html/
+COPY webapp .
+EXPOSE 80
+ENTRYPOINT ["httpd","-DFOREGROUND"]
+
+#  to define partent process 
+# CMD   OR   Entrypoint  
+
+```
+
+## 
+
+```
+[ec2-user@ip-172-31-81-232 htmlapp]$ cat myhttpd.dockerfile 
+FROM oraclelinux:8.3
+MAINTAINER ashutoshh
+RUN  yum  install  httpd -y
+WORKDIR  /var/www/html/
+COPY webapp .
+EXPOSE 80
+ENTRYPOINT ["httpd","-DFOREGROUND"]  
+#/usr/sbin/httpd -DFOREGROUND
+## systemctl start httpd
+
+
+#  to define partent process 
+# CMD   OR   Entrypoint  
+
+```
