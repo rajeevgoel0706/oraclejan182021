@@ -420,3 +420,44 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 ```
 
+## PYthon container history 
+
+```
+98  docker  run  -it -d  --name ashuc3  ashupy:v1  
+   99  docker  ps
+  100  docker  logs  -f  ashuc3
+  101  history 
+  102  docker  ps
+  103  docker 
+  104  docker rm  --help 
+  105  history 
+  106  docker  images
+  107  docker  ps
+  108  docker  pause  ashuc3
+  109  docker  ps
+  110  docker  logs  -f  ashuc3
+  111  history 
+  112  docker  
+  113  docker  unpause  ashuc3
+  114  docker ps
+  115  docker  logs  -f  ashuc3
+  116  history 
+
+```
+
+## Assignments
+
+## Question 1 
+
+```
+Q1.   create  two containers and do the given things 
+
+Image must be alpine 
+Name of container <yourname>c1 & <yourname>c2
+Parent process you can choose accordingly 
+Create two files in container1 named aa.txt & bb.txt 
+Now copy aa.txt into second container
+
+
+```
+
