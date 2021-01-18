@@ -461,3 +461,14 @@ Now copy aa.txt into second container
 
 ```
 
+## question 2 
+
+```
+Q2.  create container from centos latest image and do the below things 
+
+In this container create a file called  hello.txt with data “hii docker” using vim editor
+Check ip address of the container and write that ip in hello.txt 
+Ip address must be checked from inside the container only 
+
+
+```
