@@ -277,3 +277,35 @@ fca6ffc4d98c        alpine:latest       "ping google.com"   7 minutes ago       
 
 
 ```
+
+
+## kill and remove container 
+
+```
+[ec2-user@ip-172-31-81-232 ~]$ docker kill  $(docker  ps  -q)
+ef20960e1b5b
+087147e80d27
+343104d68174
+cf6315085042
+[ec2-user@ip-172-31-81-232 ~]$ docker  ps 
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+2570f1d2a4d8        alpine:latest       "ping google.com"   9 minutes ago       Up 1 second                             rajualpine
+[ec2-user@ip-172-31-81-232 ~]$ docker rm   $(docker  ps  -qa)
+ef20960e1b5b
+3585085d3adb
+087147e80d27
+343104d68174
+cf6315085042
+d567c9d42129
+9a3cb54df6eb
+fca6ffc4d98c
+58a4c9877b8b
+3b2538e0e2ce
+Error response from daemon: You cannot remove a running container 2570f1d2a4d88195cf6a92f6a9e697f057786d197d108b13b69167221808d398. Stop the container before attempting removal or force remove
+
+```
+
+## docker summary 
+
+<img src="sum.png">
+
