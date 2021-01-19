@@ -375,3 +375,121 @@ DAEMON_PIDFILE_TIMEOUT=10
 
 
 ```
+
+
+## docker Volumes 
+
+<img src="dvol.png">
+
+## creating a volume 
+
+```
+[ec2-user@ip-172-31-81-232 ~]$ docker  volume  create  ashuvol 
+ashuvol
+[ec2-user@ip-172-31-81-232 ~]$ docker  volume  ls
+DRIVER              VOLUME NAME
+local               anuvol
+local               ashuvol
+[ec2-user@ip-172-31-81-232 ~]$ docker  volume  inspect  ashuvol 
+[
+    {
+        "CreatedAt": "2021-01-19T09:14:52Z",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/ashuvol/_data",
+        "Name": "ashuvol",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+
+
+```
+
+## Docker volume 
+
+```
+[ec2-user@ip-172-31-81-232 ~]$ docker  volume  ls
+DRIVER              VOLUME NAME
+local               anuvol
+local               ashuvol
+local               rajeevv1
+local               seshavol
+[ec2-user@ip-172-31-81-232 ~]$ docker run -it --name ashuok1  -v  ashuvol:/data:rw   alpine  sh 
+/ # ls 
+bin    data   dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
+/ # cd  data/
+/data # ls
+/data # mkdir heool wo fosdfjsdf
+/data # ls
+fosdfjsdf  heool      wo
+/data # touch a.txt b.txt 
+/data # ls
+a.txt      b.txt      fosdfjsdf  heool      wo
+/data # exit
+[ec2-user@ip-172-31-81-232 ~]$ docker rm  ashuok1 
+ashuok1
+[ec2-user@ip-172-31-81-232 ~]$ docker run -it --name ashuok2  -v  ashuvol:/new:rw   alpine  sh 
+/ # 
+/ # cd  /new/
+/new # ls
+a.txt      b.txt      fosdfjsdf  heool      wo
+/new # exit
+
+```
+
+## accessing volume from host
+
+```
+[ec2-user@ip-172-31-81-232 ~]$ sudo -i
+[root@ip-172-31-81-232 ~]# cd /var/lib/docker/
+[root@ip-172-31-81-232 docker]# 
+[root@ip-172-31-81-232 docker]# ls
+builder  buildkit  containers  image  network  overlay2  plugins  runtimes  swarm  tmp  trust  volumes
+[root@ip-172-31-81-232 docker]# cd volumes/
+[root@ip-172-31-81-232 volumes]# ls
+anuvol  ashuvol  metadata.db  rajeevv1  santhoshivol  sauravvol  seshavol
+[root@ip-172-31-81-232 volumes]# cd  ashuvol/
+[root@ip-172-31-81-232 ashuvol]# ls
+_data
+[root@ip-172-31-81-232 ashuvol]# cd _data/
+[root@ip-172-31-81-232 _data]# ls
+a.txt  b.txt  fosdfjsdf  heool  wo
+[root@ip-172-31-81-232 _data]# logout
+
+```
+
+## Readonly file 
+
+```
+[ec2-user@ip-172-31-81-232 ~]$ docker run -it --name ashuok3  -v  ashuvol:/new1:ro   alpine  sh 
+/ # cd /new1/
+/new1 # ls
+a.txt      b.txt      fosdfjsdf  heool      wo
+/new1 # mkdir sdjfsdf
+mkdir: can't create directory 'sdjfsdf': Read-only file system
+/new1 # 
+
+```
+
+
+## more volumes command 
+
+```
+416  docker  run  -it --name xx1  -v  /home/ec2-user/hello.txt:/root/a.txt   alpine  sh 
+  417  docker  volume  create  ashuvol 
+  418  docker  volume  ls
+  419  docker  volume  inspect  ashuvol 
+  420  docker  volume  ls
+  421  docker run -it --name ashuok1  -v  ashuvol:/data:rw   alpine  sh 
+  422  docker rm  ashuok1 
+  423  docker run -it --name ashuok2  -v  ashuvol:/new:rw   alpine  sh 
+  424  sudo -i
+  425  docker run -it --name ashuok3  -v  ashuvol:/new1:ro   alpine  sh 
+  426  history 
+  427  docker  volume  ls
+ 
+  429  docker volume rm ashuvol 
+  430  history 
+
+```
