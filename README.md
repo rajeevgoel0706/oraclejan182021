@@ -493,3 +493,20 @@ mkdir: can't create directory 'sdjfsdf': Read-only file system
   430  history 
 
 ```
+
+## Question 3 
+
+```
+Q3.  build a docker image  and push it to docker hub 
+
+Use this url “https://github.com/mdn/beginner-html-site-styled” (USE THIS LINK inside dockerfile only)
+Create a dockerfile by the name  <yourname>.dockerfile
+Use any image in FROM statement but you need to install httpd server 
+Copy above html based application into the document root of httpd server 
+Use ENTRYPOINT to define parent process so that whenever container go created this must host this application by default.
+Name of image during build time will be  <yourname>apache:httpd2
+Create a container to verify everything is working fine then delete container
+If application is working fine then only push this image to docker hub
+
+```
+
