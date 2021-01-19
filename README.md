@@ -105,3 +105,24 @@ LICENSE
 .git
 
 ```
+
+
+# image sharing 
+
+<img src="reg.png">
+
+## more closure look 
+
+<img src="imgreg.png">
+
+## pushing image on docker hub 
+
+```
+352  docker  login  
+  353  docker  images  |   grep -i ashu
+  354  docker  tag  ashujsp:v1    dockerashu/ashujsp:v1  
+  355  docker  images  |   grep -i ashu
+  356  docker  push  dockerashu/ashujsp:v1  
+  357  docker  logout 
+
+```
