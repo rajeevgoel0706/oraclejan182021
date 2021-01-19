@@ -574,3 +574,41 @@ rajeevapache                httpd2        f8568c87b0b3   30 minutes ago   548MB
 $env:DOCKER_HOST="tcp://54.161.225.68:2375" 
 
 ```
+
+
+## TO connect multi docker engine we use context
+
+```
+❯ docker  context  ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT                 ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock   https://127.0.0.1:55000 (default)   swarm
+
+```
+
+## creating context 
+
+```
+❯ docker  context  create  staging  --docker  "host=tcp://54.161.225.68:2375"
+staging
+Successfully created context "staging"
+❯ 
+❯ docker  context  ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT                 ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock   https://127.0.0.1:55000 (default)   swarm
+staging             moby                                                          tcp://54.161.225.68:2375                          
+
+```
+
+##
+
+```
+❯ docker  context use staging
+staging
+❯ docker  context  ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT                 ORCHESTRATOR
+default             moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock   https://127.0.0.1:55000 (default)   swarm
+staging *           moby 
+
+```
+
+
