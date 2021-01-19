@@ -623,3 +623,86 @@ CONTAINER ID        IMAGE                 COMMAND             CREATED           
 
 
 ```
+
+
+## Docker-compose Installation 
+
+```
+[ec2-user@ip-172-31-81-232 ~]$ sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   651  100   651    0     0   5292      0 --:--:-- --:--:-- --:--:--  5292
+100 11.6M  100 11.6M    0     0  44.3M      0 --:--:-- --:--:-- --:--:-- 44.3M
+[ec2-user@ip-172-31-81-232 ~]$ sudo chmod +x /usr/local/bin/docker-compose
+[ec2-user@ip-172-31-81-232 ~]$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+[ec2-user@ip-172-31-81-232 ~]$ 
+[ec2-user@ip-172-31-81-232 ~]$ docker-compose  -v
+docker-compose version 1.27.4, build 40524192
+
+```
+
+## compose view
+
+<img src="compose.png">
+
+## Example 1
+
+```
+[ec2-user@ip-172-31-81-232 ashuexample1]$ cat  docker-compose.yaml 
+version: "3.8"
+services:
+ ashuapp1:
+  image: alpine
+  container_name: ashuc1
+  command: ping fb.com
+  
+```
+
+## running compose file
+
+```
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose up -d
+Creating network "ashuexample1_default" with the default driver
+Creating ashuc1 ... done
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose ps
+ Name      Command     State   Ports
+------------------------------------
+ashuc1   ping fb.com   Up         
+
+```
+## more compose commands
+
+```
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose ps
+ Name      Command     State   Ports
+------------------------------------
+ashuc1   ping fb.com   Up           
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose stop
+Stopping ashuc1 ... done
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose start
+Starting ashuapp1 ... done
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose ps
+ Name      Command     State   Ports
+------------------------------------
+ashuc1   ping fb.com   Up           
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose kill
+Killing ashuc1 ... done
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose ps
+ Name      Command      State     Ports
+---------------------------------------
+ashuc1   ping fb.com   Exit 137        
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose start
+Starting ashuapp1 ... done
+
+```
+
+## clean up
+
+```
+[ec2-user@ip-172-31-81-232 ashuexample1]$ docker-compose  down
+Stopping ashuc1 ... done
+Removing ashuc1 ... done
+Removing network ashuexample1_default
+
+```
+
