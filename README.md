@@ -510,3 +510,67 @@ If application is working fine then only push this image to docker hub
 
 ```
 
+
+## External directory using volume 
+
+```
+ 431  git clone https://github.com/mdn/beginner-html-site-styled 
+  432  ls
+  433  docker run -d --name xui1 -p 2002:80  -v /home/ec2-user/beginner-html-site-styled/:/var/www/html:ro httpd 
+  434  docker run -d --name xui11 -p 2012:80  -v /home/ec2-user/beginner-html-site-styled/:/usr/share/nginx/html:ro nginx 
+  
+ ```
+ 
+ ## Starting docker daemon in TCP socket 
+ 
+ ```
+ [ec2-user@ip-172-31-81-232 ~]$ cd /etc/sysconfig/
+[ec2-user@ip-172-31-81-232 sysconfig]$ ls
+acpid       clock     docker          i18n        man-db      network-scripts  readonly-root  rsyslog    sysstat
+atd         console   docker-storage  init        modules     nfs              rpc-rquotad    run-parts  sysstat.ioconf
+authconfig  cpupower  grub            irqbalance  netconsole  raid-check       rpcbind        selinux
+chronyd     crond     htcacheclean    keyboard    network     rdisc            rsyncd         sshd
+[ec2-user@ip-172-31-81-232 sysconfig]$ sudo vim docker
+[ec2-user@ip-172-31-81-232 sysconfig]$ sudo systemctl daemon-reload 
+[ec2-user@ip-172-31-81-232 sysconfig]$ sudo systemctl restart  docker
+[ec2-user@ip-172-31-81-232 sysconfig]$ cat docker
+# The max number of open files for the daemon itself, and all
+# running containers.  The default value of 1048576 mirrors the value
+# used by the systemd service unit.
+DAEMON_MAXFILES=1048576
+
+# Additional startup options for the Docker daemon, for example:
+# OPTIONS="--ip-forward=true --iptables=true"
+# By default we limit the number of open files per container
+OPTIONS="--default-ulimit nofile=1024:4096 -H tcp://0.0.0.0:2375  -H unix:///var/run/docker.sock"
+
+# How many seconds the sysvinit script waits for the pidfile to appear
+# when starting the daemon.
+DAEMON_PIDFILE_TIMEOUT=10
+
+
+```
+
+
+## Mac client 
+
+```
+ export DOCKER_HOST="tcp://54.161.225.68:2375"
+❯ docker  images
+REPOSITORY                  TAG           IMAGE ID       CREATED          SIZE
+rajeevapache                httpd3        0183ea325b37   9 minutes ago    548MB
+sauravapache                httpd2        3433c7859bc2   18 minutes ago   360MB
+yogeshapache                httpd2        ae2247e986d9   24 minutes ago   649MB
+<none>                      <none>        dfdf73216e05   28 minutes ago   548MB
+<none>                      <none>        3d98d7a7515e   29 minutes ago   5.61MB
+rajeevapache                httpd2        f8568c87b0b3   30 minutes ago   548MB
+
+
+```
+
+## WIndows powershell
+
+```
+$env:DOCKER_HOST="tcp://54.161.225.68:2375" 
+
+```
