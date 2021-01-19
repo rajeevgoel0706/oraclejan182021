@@ -612,3 +612,14 @@ staging *           moby
 ```
 
 
+## portainer web UI deployment on Docker engine 
+
+```
+[ec2-user@ip-172-31-81-232 ~]$ docker run -d --name webui -p 1199:9000 -v  /var/run/docker.socker:/var/run/docker.sock portainer/portainer  
+34879fd176bcb93e525bd80125db4cf44f0b6f1f270e486be2efdf6e33036b54
+[ec2-user@ip-172-31-81-232 ~]$ docker  ps
+CONTAINER ID        IMAGE                 COMMAND             CREATED             STATUS              PORTS                    NAMES
+34879fd176bc        portainer/portainer   "/portainer"        3 seconds ago       Up 2 seconds        0.0.0.0:1199->9000/tcp   webui
+
+
+```
