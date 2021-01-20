@@ -333,4 +333,71 @@ services:
 <img src="k8sinstall.png">
 
 
+ ## k3s light 
  
+ [link] ('https://k3s.io/')
+ 
+ 
+ ## Minikube based k8s single node cluster 
+ 
+ ```
+ ❯ minikube start --driver=docker
+😄  minikube v1.16.0 on Darwin 11.1
+✨  Using the docker driver based on existing profile
+👍  Starting control plane node minikube in cluster minikube
+🔄  Restarting existing docker container for "minikube" ...
+🐳  Preparing Kubernetes v1.20.0 on Docker 20.10.0 ...| 
+
+
+```
+
+
+## token file to share with client 
+
+### token file location on k8s cluster side 
+
+```
+[root@k8s-master ~]# cd   /etc/kubernetes/
+[root@k8s-master kubernetes]# ls
+admin.conf  controller-manager.conf  kubelet.conf  manifests  pki  scheduler.conf
+
+```
+
+## from client machine check the connection 
+
+```
+❯ kubectl   version   --kubeconfig  admin.conf
+Client Version: version.Info{Major:"1", Minor:"20", GitVersion:"v1.20.2", GitCommit:"faecb196815e248d3ecfb03c680a4507229c2a56", GitTreeState:"clean", BuildDate:"2021-01-13T13:28:09Z", GoVersion:"go1.15.5", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"20", GitVersion:"v1.20.2", GitCommit:"faecb196815e248d3ecfb03c680a4507229c2a56", GitTreeState:"clean", BuildDate:"2021-01-13T13:20:00Z", GoVersion:"go1.15.5", Compiler:"gc", Platform:"linux/amd64"}
+❯ kubectl   get  nodes   --kubeconfig  admin.conf
+NAME          STATUS   ROLES                  AGE   VERSION
+k8s-master    Ready    control-plane,master   20m   v1.20.2
+k8s-minion1   Ready    <none>                 19m   v1.20.2
+k8s-minion2   Ready    <none>                 19m   v1.20.2
+k8s-minion3   Ready    <none>                 19m   v1.20.2
+
+```
+
+
+## more checking commands from client side 
+
+```
+❯ kubectl   get  no
+NAME          STATUS   ROLES                  AGE   VERSION
+k8s-master    Ready    control-plane,master   34m   v1.20.2
+k8s-minion1   Ready    <none>                 33m   v1.20.2
+k8s-minion2   Ready    <none>                 33m   v1.20.2
+k8s-minion3   Ready    <none>                 33m   v1.20.2
+❯ 
+❯ 
+❯ kubectl  cluster-info
+Kubernetes control plane is running at https://3.91.146.62:6443
+KubeDNS is running at https://3.91.146.62:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+░▒▓ ~ ·········
+
+```
+
+
