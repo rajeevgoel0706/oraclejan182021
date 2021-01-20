@@ -400,4 +400,149 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 ```
 
+## smallest unit of k8s is POD
+
+<img src="pod.png">
+
+## Compose to learn POD 
+
+<img src="poddesign.png">
+
+
+# PODS
+
+---
+```
+❯ cat  ashupod1.yaml
+apiVersion: v1 # this is my apiversion fo k8s
+kind: Pod 
+metadata:
+ name: ashu-pod-1 # make sure unique pod name 
+spec:
+ containers:
+ - image: nginx
+   name: ashuc1 
+   ports:
+   - containerPort: 80
+   
+   
+   
+```
+
+## pod deployment 
+
+```
+❯ kubectl apply  -f  ashupod1.yaml --dry-run=client
+pod/ashu-pod-1 created (dry run)
+❯ kubectl apply  -f  ashupod1.yaml
+pod/ashu-pod-1 created
+❯ kubectl  get  pods
+NAME         READY   STATUS    RESTARTS   AGE
+ashu-pod-1   1/1     Running   0          13s
+
+```
+
+## More pod commands 
+
+```
+❯ kubectl  get  pods
+NAME           READY   STATUS         RESTARTS   AGE
+ashu-pod-1     1/1     Running        0          3m57s
+rajeev-pod-1   0/1     ErrImagePull   0          45s
+rajupod1       1/1     Running        0          2m33s
+saurav-pod-1   1/1     Running        0          57s
+sesha-pod-1    1/1     Running        0          73s
+skm-pod-1      1/1     Running        0          25s
+sony-pod-1     1/1     Running        0          109s
+yogesh-pod-1   1/1     Running        0          3m24s
+❯ kubectl  get  nodes
+NAME          STATUS   ROLES                  AGE   VERSION
+k8s-master    Ready    control-plane,master   67m   v1.20.2
+k8s-minion1   Ready    <none>                 67m   v1.20.2
+k8s-minion2   Ready    <none>                 67m   v1.20.2
+k8s-minion3   Ready    <none>                 67m   v1.20.2
+❯ kubectl  get   pods  ashu-pod-1  -o wide
+NAME         READY   STATUS    RESTARTS   AGE     IP               NODE          NOMINATED NODE   READINESS GATES
+ashu-pod-1   1/1     Running   0          4m55s   192.168.27.194   k8s-minion2   <none>           <none>
+❯ kubectl  get   pods  -o wide
+NAME           READY   STATUS             RESTARTS   AGE     IP               NODE          NOMINATED NODE   READINESS GATES
+ashu-pod-1     1/1     Running            0          5m16s   192.168.27.194   k8s-minion2   <none>           <none>
+rajeev-pod-1   0/1     ImagePullBackOff   0          2m4s    192.168.27.196   k8s-minion2   <none>           <none>
+rajupod1       1/1     Running            0          3m52s   192.168.54.66    k8s-minion1   <none>           <none>
+saurav-pod-1   1/1     Running            0          2m16s   192.168.54.68    k8s-minion1   <none>           <none>
+sesha-pod-1    1/1     Running            0          2m32s   192.168.214.3    k8s-minion3   <none>           <none>
+skm-pod-1      1/1     Running            0          104s    192.168.214.4    k8s-minion3   <none>           <none>
+sony-pod-1     1/1     Running            0          3m8s    192.168.54.67    k8s-minion1   <none>           <none>
+yogesh-pod-1   1/1     Running            0          4m43s   192.168.214.2    k8s-minion3   <none>           <none>
+
+
+```
+
+## describe POD 
+
+```
+kubectl  describe  pods  ashu-pod-1 
+```
+
+## yaml and json generate 
+
+```
+❯ kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashupod2
+  name: ashupod2
+spec:
+  containers:
+  - image: nginx
+    name: ashupod2
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+❯ kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o json
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "ashupod2",
+        "creationTimestamp": null,
+        "labels": {
+            "run": "ashupod2"
+
+
+```
+
+## POd yaml saving 
+
+```
+kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o yaml   >ashupod2.yaml
+❯ ls
+ashupod1.yaml ashupod2.yaml
+❯ cat  ashupod2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashupod2
+  name: ashupod2
+spec:
+  containers:
+  - image: nginx
+    name: ashupod2
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+```
+
 
