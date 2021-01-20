@@ -277,3 +277,60 @@ services:
    
 ```
 
+## Final example
+
+```
+[ec2-user@ip-172-31-81-232 htmlapp]$ cat  mysql.yml 
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+     - db  # name of app service 
+     
+ ```
+ 
+ ## application deploy and manage issues 
+ 
+ <img src="prob.png">
+ 
+ 
+ ## COntainer orchestrations 
+ 
+ <img src="corch.png">
+ 
+ ## k8s manager 
+ 
+ <img src="k8s1.png">
+ 
+ ## k8s basic architecture 
+ 
+ <img src="karch.png">
+ 
+ ## master node info 
+ 
+ <img src="masternode.png">
+ 
+ ## mininode with CNI 
+ 
+ <img src="cni.png">
+ 
+ ## k8s installation options 
+ 
+<img src="k8sinstall.png">
+
+
+ 
