@@ -544,5 +544,24 @@ spec:
 status: {}
 
 ```
+## accessing application 
+
+```
+❯ kubectl  port-forward  ashupod2  1123:80
+Forwarding from 127.0.0.1:1123 -> 80
+Forwarding from [::1]:1123 -> 80
+Handling connection for 1123
+Handling connection for 1123
+
+```
+
+## understanding service in k8s
+
+<img src="service.png">
+
+## service to access POD 
+
+<img src="svc2pod.png">
+
 
 
