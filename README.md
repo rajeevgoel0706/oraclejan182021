@@ -273,6 +273,98 @@ replicationcontroller/ashu-rc-1 scaled
 NAME        DESIRED   CURRENT   READY   AGE
 ashu-rc-1   2         2         2       22m
 
+```
+
+## history 
+
+```
+ 4072  kubectl  get po --show-labels
+ 4073  kubectl  get po ashu-rc-1-l426k   --show-labels
+❯ kubectl delete  rc  ashu-rc-1
+replicationcontroller "ashu-rc-1" deleted
+❯ kubectl delete all --all
+
+```
+
+## introduction to deployment api resource in k8s
+
+
+<img src="deployment.png">
+
+## reality of deployment 
+
+<img src="depreal.png">
+
+## creating deployemnt 
+
+```
+❯ kubectl create  deployment  ashu-depweb --image=dockerashu/jan2021:webv1 --dry-run=client -o yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashu-depweb
+  name: ashu-depweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ashu-depweb
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ashu-depweb
+    spec:
+      containers:
+      - image: dockerashu/jan2021:webv1
+        name: jan2021
+        resources: {}
+status: {}
+❯ kubectl create  deployment  ashu-depweb --image=dockerashu/jan2021:webv1 --dry-run=client -o yaml >ashudep.yml
+
+
+```
+
+
+## checking deployment 
+
+```
+❯ kubectl get deploy
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+ashu-depweb        1/1     1            1           32s
+dhp-webapp         0/1     1            0           1s
+rajeev-deployweb   1/1     1            1           6s
+rajeev-depweb      1/1     1            1           3m9s
+raju-depweb        1/1     1            1           81s
+santhoshi-depweb   1/1     1            1           2m8s
+sat-depweb         1/1     1            1           5s
+skm-depweb         1/1     1            1           76s
+sony-depweb        1/1     1            1           18s
+❯ kubectl  get  rs
+NAME                          DESIRED   CURRENT   READY   AGE
+ashu-depweb-54f9bb9fc4        1         1         1       36s
+dhp-webapp-767d45d94c         1         1         1       5s
+rajeev-deployweb-bd7f777c6    1         1         1       10s
+rajeev-depweb-6549c8ccd6      1         1         1       3m13s
+raju-depweb-79f84968bc        1         1         1       85s
+santhoshi-depweb-8548c7964b   1         1         1       2m12s
+sat-depweb-ddc958b7f          1         1         1       9s
+skm-depweb-6f8bcb8b8          1         1         1       80s
+sony-depweb-67bc9fb758        1         1         1       22s
+❯ kubectl  get  po
+NAME                                READY   STATUS    RESTARTS   AGE
+ashu-depweb-54f9bb9fc4-vfnqs        1/1     Running   0          41s
+dhp-webapp-767d45d94c-t7t8m         1/1     Running   0          10s
+rajeev-deployweb-bd7f777c6-7xb2p    1/1     Running   0          15s
+rajeev-depweb-6549c8ccd6-dwctl      1/1     Running   0          3m18s
+raju-depweb-79f84968bc-nf8d9        1/1     Running   0          90s
+santhoshi-depweb-8548c7964b-85dp4   1/1     Running   0          2m17s
+sat-depweb-ddc958b7f-bg8w8          1/1     Running   0          14s
+skm-depweb-6f8bcb8b8-fjrp8          1/1     Running   0          85s
+sony-depweb-67bc9fb758-2fptx        1/1     Running   0          27s
 
 ```
 
