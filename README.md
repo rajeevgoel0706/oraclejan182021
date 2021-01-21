@@ -485,6 +485,58 @@ deployment.apps/ashu-depweb rolled back
 ❯ kubectl rollout  undo  deployment  ashu-depweb  --to-revesion=1
 
 ```
+# PUshing image to ACR 
+
+```
+4157  docker pull alpine 
+ 4158  docker  images
+ 4159  docker  tag  alpine:latest    ashutoshhoracle.azurecr.io/alpine:v1
+ 4160  docker  images
+ 4161  docker  login  ashutoshhoracle.azurecr.io 
+ 4162  docker  push  ashutoshhoracle.azurecr.io/alpine:v1
+ 
+ ```
+ 
+ # secret in k8s
+ 
+ <img src="secret.png">
+ 
+ ## creating secret of docker registry type 
+ 
+ ```
+ kubectl  create  secret  docker-registry  ashusec1  --docker-server=ashutoshhoracle.azurecr.io --docker-username=ashutoshhoracle    --docker-password=456gfhgHIvugeQ
+ 
+ ```
+ 
+ ## POd more commands
+ 
+ ```
+ 4188  kubectl  logs  ashudep2-587474c959-thszw  
+ 4189  kubectl  logs  ashudep2-587474c959-thszw   -f
+❯ kubectl exec -it ashudep2-587474c959-thszw  sh
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+/ # 
+/ # 
+/ # 
+/ # cat  /etc/os-release 
+NAME="Alpine Linux"
+ID=alpine
+VERSION_ID=3.13.0
+PRETTY_NAME="Alpine Linux v3.13"
+HOME_URL="https://alpinelinux.org/"
+BUG_REPORT_URL="https://bugs.alpinelinux.org/"
+/ # exit
+
+```
+
+###
+
+```
+❯ kubectl exec -it ashudep2-587474c959-thszw --  sh
+/ # 
+
+```
+
 
 
 
