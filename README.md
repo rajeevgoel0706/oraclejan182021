@@ -146,5 +146,21 @@ yogeshsvc1      NodePort    10.104.99.50     <none>        9876:31330/TCP   32s
 
 ```
 
+## service ip 
+
+```
+❯ kubectl get svc -o wide
+NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE   SELECTOR
+ashusvc1        NodePort    10.109.119.122   <none>        1234:32376/TCP   22m   x=helloashu
+dhpsvc1         NodePort    10.111.174.162   <none>        4567:32662/TCP   22m   x=helloadhp
+kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP          20h   <none>
+rajeevc1        NodePort    10.102.64.6      <none>        1235:30974/TCP   22m   x=hellorajeev
+raju-svc1       NodePort    10.106.203.183   <none>        1234:30007/TCP   19m   x=raju_l1
+santhoshisvc1   NodePort    10.110.169.29    <none>        1261:30971/TCP   22m   x=hellosanthoshi
+satsvc1         NodePort    10.98.115.45     <none>        1234:32697/TCP   21m   x=satlab1
+
+
+```
+
 
 
