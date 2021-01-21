@@ -162,5 +162,101 @@ satsvc1         NodePort    10.98.115.45     <none>        1234:32697/TCP   21m 
 
 ```
 
+## Deleting pod and services
+
+```
+❯ kubectl delete pods --all
+pod "ashu-pod-1" deleted
+pod "dhp-pod-1" deleted
+pod "rajeev-pod-1" deleted
+pod "rajupod1" deleted
+pod "santhoshi-pod-1" deleted
+pod "sat-1" deleted
+pod "sat-2" deleted
+pod "saurav-pod-1" deleted
+pod "seshapod1" deleted
+pod "skm-pod-3" deleted
+pod "sony-pod-1" deleted
+pod "yogesh-pod-1" deleted
+❯ kubectl delete svc --all
+service "ashusvc1" deleted
+service "dhpsvc1" deleted
+service "kubernetes" deleted
+service "rajeevc1" deleted
+service "raju-svc1" deleted
+service "santhoshisvc1" deleted
+service "satsvc1" deleted
+service "sauravsvc1" deleted
+service "seshasvc1" deleted
+service "sonyvc1" deleted
+service "yogeshsvc1" deleted
+
+```
+
+# Replication controller
+
+```
+apiVersion: v1
+kind: ReplicationController
+metadata:
+ name: ashu-rc-1
+ labels:  # label of RC 
+  x: helloashurc
+spec:
+ replicas: 1 #  need one Pod
+ template: # use this template to create no of pod replica
+  metadata:
+   labels:
+    x: helloashurcc  # label of all the POD created by RC 
+  spec:
+   containers:
+  - image: dockerashu/ashujsp:v1 
+    name: ashuc1 
+    ports:
+    - containerPort: 80 # application port
+    
+ ```
+ 
+ 
+ ## deployment of RC
+ 
+ ```
+ ❯ kubectl apply -f ashurc1.yaml
+replicationcontroller/ashu-rc-1 created
+❯ 
+❯ kubectl  get   replicationcontroller
+NAME        DESIRED   CURRENT   READY   AGE
+ashu-rc-1   1         1         0       10s
+sat-rc-1    1         1         0       14s
+❯ 
+❯ kubectl  get    rc
+NAME        DESIRED   CURRENT   READY   AGE
+ashu-rc-1   1         1         1       16s
+sat-rc-1    1         1         1       20s
+
+```
+
+## replacing any yaml api resource
+
+```
+❯ kubectl replace -f ashurc1.yaml --force
+replicationcontroller "ashu-rc-1" deleted
+replicationcontroller/ashu-rc-1 replaced
+❯ kubectl replace -f ashusvc1.yaml --force
+service "ashusvc1" deleted
+service/ashusvc1 replaced
+
+```
+
+## Expose RC to create service with matched label of POD
+
+```
+❯ kubectl  expose  rc  ashu-rc-1   --type NodePort --port 1234 --target-port 8080 --name ashusvc2
+service/ashusvc2 exposed
+❯ kubectl  get  svc
+NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+ashusvc2        NodePort    10.111.38.236    <none>        1234:30101/TCP   23s
+
+```
 
 
