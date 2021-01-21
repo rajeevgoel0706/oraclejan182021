@@ -538,5 +538,456 @@ BUG_REPORT_URL="https://bugs.alpinelinux.org/"
 ```
 
 
+# top 200 kubectl commands
 
+```
+3948  kubectl apply  -f  ashupod1.yaml --dry-run=client  
+ 3949  kubectl apply  -f  ashupod1.yaml 
+ 3950  kubectl  get  pods
+ 3951  kubectl  get  nodes
+ 3952  kubectl  get   pods  ashu-pod-1  -o wide 
+ 3953  kubectl  get   pods  -o wide 
+ 3954  history
+ 3955  kubectl  get   pods  
+ 3956  kubectl  get   pods  ashu-pod-1  -o wide 
+ 3957  kubectl  describe  pods  ashu-pod-1  
+ 3958  kubectl  get   pods  
+ 3959  kubectl  describe  pods  pod1    
+ 3960  history
+ 3961  kubectl  get   pods  
+ 3962  kubectl delete pod pod1 
+ 3963  kubectl  get   pods  -o wide 
+ 3964  # docker run  
+ 3965  kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o yaml
+ 3966  kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o json 
+ 3967  kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o yaml   >ashupod2.yaml
+ 3968  ls
+ 3969  cat  ashupod2.yaml
+ 3970  kubectl apply -f ashupod2.yaml
+ 3971  kubectl  get po 
+ 3972  history
+ 3973  kubectl  get po 
+ 3974  kubectl  get no
+ 3975  kubectl get po ashupod2 -o wide
+ 3976  kubectl  port-farword  ashupod2  1123:80
+ 3977  kubectl  port-forward  ashupod2  1123:80
+ 3978  Connect-AzAccount
+ 3979  brew update && brew install azure-cli
+ 3980  brew update
+ 3981  brew install azure-cli 
+ 3982  brew upgrade azure-cli 
+ 3983  Connect-AzAccount
+ 3984  onnect-AzAccount
+ 3985  Connect-AzAccount
+ 3986  az login 
+ 3987  clear
+ 3988  az vm availability-set list
+ 3989  kubectl  get  nodes
+ 3990  kubectl   get  pods 
+ 3991  kubectl   delete pods --all
+ 3992  kubectl  get  po 
+ 3993  kubectl  get  no
+ 3994  cd  Desktop/mypods
+ 3995  ls
+ 3996  kubectl apply -f  ashupod1.yaml 
+ 3997  kubectl  get  po 
+ 3998  kubectl  get  po  ashu-pod-1 -o wide
+ 3999  kubectl  get po 
+ 4000  kubectl  get po ashu-pod-1  -o wide 
+ 4001  kubectl  get po ashu-pod-1  --show-labels
+ 4002  kubectl  get po   --show-labels
+ 4003  history
+ 4004  kubectl  get po   --show-labels
+ 4005  kubectl  api-resources
+ 4006  kubectl  get po   --show-labels
+ 4007  kubectl  get pods   --show-labels
+ 4008  kubectl  get pods   --show-labels -o wide 
+ 4009  history
+ 4010  kubectl  describe pod ashu-pod-1
+ 4011  history
+ 4012  kubectl  create  service  nodeport  ashusvc1  --tcp  1234:80  --dry-run=client -o yaml 
+ 4013  kubectl  create  service  nodeport  ashusvc1  --tcp  1234:80  --dry-run=client -o yaml  >ashusvc1.yaml
+ 4014  kubectl  api-resources 
+ 4015  kubectl  api-resources   | wc -l
+ 4016  kubectl apply -f ashusvc1.yaml 
+ 4017  kubectl  get  service 
+ 4018  cd
+ 4019  ssh -i Downloads/macdocker.pem ec2-user@3.91.146.62
+ 4020  kubectl apply -f ashusvc1.yaml
+ 4021  kubectl get svc
+ 4022  kubectl apply -f ashusvc1.yaml
+ 4023  kubectl get svc -o wide 
+ 4024  kubectl get svc ashusvc1  -o yaml 
+ 4025  kubectl get pod ashu-pod-1  -o yaml 
+ 4026  history
+ 4027  kubectl delete pods --all
+ 4028  kubectl delete svc --all
+ 4029  kubectl apply -f ashurc1.yaml 
+ 4030  kubectl  get   replicationcontroller
+ 4031  kubectl  get    rc
+ 4032  kubectl  get  po 
+ 4033  kubectl  get  po -o wide 
+ 4034  kubectl  get    rc
+ 4035  kubectl  get  po 
+ 4036  kubectl delete pod ashu-rc-1-rlxcp  
+ 4037  kubectl  get  po 
+ 4038  kubectl  get  po -o wide
+ 4039  history
+ 4040  kubectl apply -f ashusvc1.yaml 
+ 4041  kubectl get  svc
+ 4042  kubectl  get  po --show-labels
+ 4043  kubectl replace -f ashurc1.yaml --force 
+ 4044  kubectl replace -f ashusvc1.yaml --force 
+ 4045  kubectl get rc 
+ 4046  kubectl  get  svc 
+ 4047  history
+ 4048  kubectl  get  svc 
+ 4049  kubectl  delete  svc ashusvc1
+ 4050  kubectl  get  rc
+ 4051  kubectl  expose  rc  ashu-rc-1   --type NodePort --port 1234 --target-port 8080 --name ashusvc2 
+ 4052  kubectl  get  svc 
+ 4053  history
+ 4054  kubectl  expose  rc  ashu-rc-1   --type NodePort --port 1234 --target-port 8080 --name ashusvc2 --dry-run=client -o yaml 
+ 4055  kubectl get svc  ashusvc2  -o yaml 
+ 4056  history
+ 4057  kubectl  get  po
+ 4058  kubectl  describe pod ashu-rc-1-l426k  
+ 4059  history
+ 4060  kubectl apply -f ashurc1.yaml
+ 4061  kubectl  get  rc 
+ 4062  kubectl  get  po 
+ 4063  kubectl  get  po -o wide 
+ 4064  history
+ 4065  kubectl  get  rc 
+ 4066  kubectl  scale  rc  ashu-rc-1  --replicas=5
+ 4067  kubectl  get  rc  ashu-rc-1
+ 4068  kubectl  scale  rc  ashu-rc-1  --replicas=2
+ 4069  kubectl  get  rc  ashu-rc-1
+ 4070  kubectl  get po
+ 4071  history
+ 4072  kubectl  get po --show-labels
+ 4073  kubectl  get po ashu-rc-1-l426k   --show-labels
+ 4074  history
+ 4075  kubectl delete  rc  ashu-rc-1
+ 4076  kubectl delete all --all
+ 4077  history
+ 4078  kubectl get  all 
+ 4079  docker build  -t  dockerashu/jan2021:webv1  https://github.com/redashu/beginner-html-site-styled.git 
+ 4080  docker build  -t  dockerashu/jan2021:webv1  https://github.com/redashu/beginner-html-site-styled.git\#gh-pages 
+ 4081  docker push dockerashu/jan2021:webv1
+ 4082  kubectl create  deployment  ashu-depweb --image=dockerashu/jan2021:webv1 --dry-run=client -o yaml 
+ 4083  kubectl create  deployment  ashu-depweb --image=dockerashu/jan2021:webv1 --dry-run=client -o yaml >ashudep.yml
+ 4084  history
+ 4085  kubectl apply -f  ashudep.yml
+ 4086  kubectl get deployments
+ 4087  kubectl get deployment
+ 4088  kubectl get deploy
+ 4089  kubectl  get  rs
+ 4090  kubectl  get  po
+ 4091  history
+ 4092  kubectl get deploy
+ 4093  kubectl expose deployment ashu-depweb --type NodePort --port 1234 --target-port 80 --name ashusvc3 
+ 4094  kubectl get svc 
+ 4095  history
+ 4096  kubectl explain  pod
+ 4097  kubectl explain  pod.kind
+ 4098  kubectl explain  pod.spec 
+ 4099  kubectl explain  pod.spec.containers
+ 4100  kubectl delete all --all
+ 4101  kubectl  get po 
+ 4102  kubectl  get po  -w
+ 4103  kubectl  get rc
+ 4104  kubectl  get  rs
+ 4105  kubectl  get  po
+ 4106  cd Desktop/mypods
+ 4107  ls
+ 4108  kubectl apply -f ashudep.yml
+ 4109  kubectl  get  deploy
+ 4110  kubectl expose deployment ashu-depweb  --type NodePort --port 1234 --target-port 80 --name ashusvc5 
+ 4111  kubectl  get  svc 
+ 4112  kubectl  get  rs 
+ 4113  history
+ 4114  kubectl  get deploy 
+ 4115  kubectl  get  svc 
+ 4116  kubectl  describe deployment  ashu-depweb  
+ 4117  kubectl  get deploy 
+ 4118  kubectl  get rs
+ 4119  kubectl  get deploy 
+ 4120  kubectl  scale deploy  ashu-depweb --replicas=3
+ 4121  kubectl  get deploy 
+ 4122  history
+ 4123  kubectl  get deploy 
+ 4124  kubectl  get po 
+ 4125  history
+ 4126  history|   grep -i docker
+ 4127  docker push dockerashu/jan2021:webv2
+ 4128  history
+ 4129  kubectl  describe deployment  ashu-depweb 
+ 4130  kubectl  set image  deployment  ashu-depweb jan2021=dockerashu/jan2021:webv2
+ 4131  history
+ 4132  kubectl  describe deployment  ashu-depweb 
+ 4133  history
+ 4134  kubectl  rollout history deployment ashu-depweb 
+ 4135  kubectl  describe deployment  ashu-depweb 
+ 4136  history
+ 4137  docker build  -t  dockerashu/jan2021:webv3  https://github.com/redashu/beginner-html-site-styled.git\#gh-pages
+ 4138  docker push dockerashu/jan2021:webv3
+ 4139  history
+ 4140  kubectl  set image  deployment  ashu-depweb jan2021=dockerashu/jan2021:webv3
+ 4141  kubectl  rollout history deployment ashu-depweb 
+ 4142  kubectl  describe deployment  ashu-depweb 
+ 4143  history
+ 4144  kubectl rollout  undo  deployment  ashu-depweb  --to-revesion=1
+ 4145  kubectl rollout  undo  deployment  ashu-depweb  --to-revision=1
+ 4146  ssh -i Downloads/macdocker.pem ec2-user@
+ 4147  ssh -i Downloads/macdocker.pem ec2-user@54.161.225.68
+ 4148  ## use this link https://github.com/mdn/beginner-html-site-styled 
+ 4149  ## create dockerfile and build  httpd OR nginx based docker image 
+ 4150  ## push it to dockerhub 
+ 4151  ## create a deployment using that image with 2 replica of pod 
+ 4152  ## create service to access that deployment 
+ 4153  kubectl  get deploy
+ 4154  kubectl  get svc 
+ 4155  history
+ 4156  docker  images
+ 4157  docker pull alpine 
+ 4158  docker  images
+ 4159  docker  tag  alpine:latest    ashutoshhoracle.azurecr.io/alpine:v1
+ 4160  docker  images
+ 4161  docker  login  ashutoshhoracle.azurecr.io 
+ 4162  docker  push  ashutoshhoracle.azurecr.io/alpine:v1
+ 4163  history
+ 4164  docker  logout   ashutoshhoracle.azurecr.io 
+ 4165  cd  Desktop/mypods
+ 4166  kubectl  create deployment  ashudep2  --image=ashutoshhoracle.azurecr.io/alpine:v1 --dry-run=client -o yaml >private.yml
+ 4167  ls
+ 4168  kubectl get deploy 
+ 4169  kubectl delete all --all
+ 4170  ls
+ 4171  kubectl apply -f  private.yml
+ 4172  kubectl get  deploy 
+ 4173  kubectl get  po
+ 4174  kubectl describe   deploy  ashudep2 
+ 4175  kubectl describe   pod  ashudep2-7bbb4df4f5-4gwh7
+ 4176  history
+ 4177  kubectl  create  secret  
+ 4178  kubectl  create  secret  docker-registry  ashusec1  --docker-server=ashutoshhoracle.azurecr.io --docker-username=ashutoshhoracle    --docker-password=HIvugeQW6iedXRw79y8Iv9O9sJwR+Pia  
+ 4179  kubectl  get  secret 
+ 4180  history
+ 4181  kubectl  get  secret 
+ 4182  kubectl replace -f  private.yml --force 
+ 4183  kubectl explain pod.spec  |   grep -i imagepu
+ 4184  kubectl replace -f  private.yml --force 
+ 4185  kubectl  get  po 
+ 4186  kubectl replace -f  private.yml --force 
+ 4187  kubectl  get  po 
+ 4188  kubectl  logs  ashudep2-587474c959-thszw  
+ 4189  kubectl  logs  ashudep2-587474c959-thszw   -f
+ 4190  history
+ 4191  kubectl exec -it ashudep2-587474c959-thszw  sh 
+ 4192  kubectl exec -it ashudep2-587474c959-thszw --  sh 
+❯ history  |   grep -i kubectl  |   tail -200
+ 3792  kubectl logs sauwebapp-6cff4444c5-rkhq9   -n saurav-space
+ 3793  kubectl  get svc -n saurav-space
+ 3794  kubectl  config get-contexts 
+ 3802  kubectl  config get-contexts 
+ 3803  kubectl  get  no
+ 3804  kubectl  config 
+ 3805  kubectl  config get-contexts 
+ 3806  kubectl config use-context  kubernetes-admin 
+ 3807  kubectl config use-context  kubernetes-admin@kubernetes 
+ 3808  kubectl get no
+ 3809  kubectl config use-context  arn:aws:eks:ap-south-1:061112302981:cluster/ciscojan2021 
+ 3810  kubectl get no
+ 3811  kubectl get ns
+ 3812  kubectl create deployment ashuwebapp --image=nginx 
+ 3813  kubectl get deploy 
+ 3814  kubectl expose deployment ashuwebapp --type LoadBalancer --port 1234 --target-port 80 
+ 3815  kubectl get  svc 
+ 3817  kubectl delete svc ashuwebapp 
+ 3818  kubectl get  svc 
+ 3822  kubectl  get  po 
+ 3909  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
+ 3910  chmod +x ./kubectl
+ 3911  sudo mv ./kubectl /usr/local/bin/kubectl
+ 3912  kubectl version --client
+ 3913  kubectl  version  --client 
+ 3917  kubectl   version   --kubeconfig  admin.conf
+ 3918  kubectl   get  nodes   --kubeconfig  admin.conf
+ 3919  kubectl   get  nodes  
+ 3920  kubectl   get  nodes   --kubeconfig  admin.conf
+ 3934  kubectl   get  nodes
+ 3935  kubectl   version  
+ 3938  kubectl   get  no
+ 3939  kubectl  cluster-info 
+ 3948  kubectl apply  -f  ashupod1.yaml --dry-run=client  
+ 3949  kubectl apply  -f  ashupod1.yaml 
+ 3950  kubectl  get  pods
+ 3951  kubectl  get  nodes
+ 3952  kubectl  get   pods  ashu-pod-1  -o wide 
+ 3953  kubectl  get   pods  -o wide 
+ 3955  kubectl  get   pods  
+ 3956  kubectl  get   pods  ashu-pod-1  -o wide 
+ 3957  kubectl  describe  pods  ashu-pod-1  
+ 3958  kubectl  get   pods  
+ 3959  kubectl  describe  pods  pod1    
+ 3961  kubectl  get   pods  
+ 3962  kubectl delete pod pod1 
+ 3963  kubectl  get   pods  -o wide 
+ 3965  kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o yaml
+ 3966  kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o json 
+ 3967  kubectl  run  ashupod2  --image=nginx --port=80 --dry-run=client -o yaml   >ashupod2.yaml
+ 3970  kubectl apply -f ashupod2.yaml
+ 3971  kubectl  get po 
+ 3973  kubectl  get po 
+ 3974  kubectl  get no
+ 3975  kubectl get po ashupod2 -o wide
+ 3976  kubectl  port-farword  ashupod2  1123:80
+ 3977  kubectl  port-forward  ashupod2  1123:80
+ 3989  kubectl  get  nodes
+ 3990  kubectl   get  pods 
+ 3991  kubectl   delete pods --all
+ 3992  kubectl  get  po 
+ 3993  kubectl  get  no
+ 3996  kubectl apply -f  ashupod1.yaml 
+ 3997  kubectl  get  po 
+ 3998  kubectl  get  po  ashu-pod-1 -o wide
+ 3999  kubectl  get po 
+ 4000  kubectl  get po ashu-pod-1  -o wide 
+ 4001  kubectl  get po ashu-pod-1  --show-labels
+ 4002  kubectl  get po   --show-labels
+ 4004  kubectl  get po   --show-labels
+ 4005  kubectl  api-resources
+ 4006  kubectl  get po   --show-labels
+ 4007  kubectl  get pods   --show-labels
+ 4008  kubectl  get pods   --show-labels -o wide 
+ 4010  kubectl  describe pod ashu-pod-1
+ 4012  kubectl  create  service  nodeport  ashusvc1  --tcp  1234:80  --dry-run=client -o yaml 
+ 4013  kubectl  create  service  nodeport  ashusvc1  --tcp  1234:80  --dry-run=client -o yaml  >ashusvc1.yaml
+ 4014  kubectl  api-resources 
+ 4015  kubectl  api-resources   | wc -l
+ 4016  kubectl apply -f ashusvc1.yaml 
+ 4017  kubectl  get  service 
+ 4020  kubectl apply -f ashusvc1.yaml
+ 4021  kubectl get svc
+ 4022  kubectl apply -f ashusvc1.yaml
+ 4023  kubectl get svc -o wide 
+ 4024  kubectl get svc ashusvc1  -o yaml 
+ 4025  kubectl get pod ashu-pod-1  -o yaml 
+ 4027  kubectl delete pods --all
+ 4028  kubectl delete svc --all
+ 4029  kubectl apply -f ashurc1.yaml 
+ 4030  kubectl  get   replicationcontroller
+ 4031  kubectl  get    rc
+ 4032  kubectl  get  po 
+ 4033  kubectl  get  po -o wide 
+ 4034  kubectl  get    rc
+ 4035  kubectl  get  po 
+ 4036  kubectl delete pod ashu-rc-1-rlxcp  
+ 4037  kubectl  get  po 
+ 4038  kubectl  get  po -o wide
+ 4040  kubectl apply -f ashusvc1.yaml 
+ 4041  kubectl get  svc
+ 4042  kubectl  get  po --show-labels
+ 4043  kubectl replace -f ashurc1.yaml --force 
+ 4044  kubectl replace -f ashusvc1.yaml --force 
+ 4045  kubectl get rc 
+ 4046  kubectl  get  svc 
+ 4048  kubectl  get  svc 
+ 4049  kubectl  delete  svc ashusvc1
+ 4050  kubectl  get  rc
+ 4051  kubectl  expose  rc  ashu-rc-1   --type NodePort --port 1234 --target-port 8080 --name ashusvc2 
+ 4052  kubectl  get  svc 
+ 4054  kubectl  expose  rc  ashu-rc-1   --type NodePort --port 1234 --target-port 8080 --name ashusvc2 --dry-run=client -o yaml 
+ 4055  kubectl get svc  ashusvc2  -o yaml 
+ 4057  kubectl  get  po
+ 4058  kubectl  describe pod ashu-rc-1-l426k  
+ 4060  kubectl apply -f ashurc1.yaml
+ 4061  kubectl  get  rc 
+ 4062  kubectl  get  po 
+ 4063  kubectl  get  po -o wide 
+ 4065  kubectl  get  rc 
+ 4066  kubectl  scale  rc  ashu-rc-1  --replicas=5
+ 4067  kubectl  get  rc  ashu-rc-1
+ 4068  kubectl  scale  rc  ashu-rc-1  --replicas=2
+ 4069  kubectl  get  rc  ashu-rc-1
+ 4070  kubectl  get po
+ 4072  kubectl  get po --show-labels
+ 4073  kubectl  get po ashu-rc-1-l426k   --show-labels
+ 4075  kubectl delete  rc  ashu-rc-1
+ 4076  kubectl delete all --all
+ 4078  kubectl get  all 
+ 4082  kubectl create  deployment  ashu-depweb --image=dockerashu/jan2021:webv1 --dry-run=client -o yaml 
+ 4083  kubectl create  deployment  ashu-depweb --image=dockerashu/jan2021:webv1 --dry-run=client -o yaml >ashudep.yml
+ 4085  kubectl apply -f  ashudep.yml
+ 4086  kubectl get deployments
+ 4087  kubectl get deployment
+ 4088  kubectl get deploy
+ 4089  kubectl  get  rs
+ 4090  kubectl  get  po
+ 4092  kubectl get deploy
+ 4093  kubectl expose deployment ashu-depweb --type NodePort --port 1234 --target-port 80 --name ashusvc3 
+ 4094  kubectl get svc 
+ 4096  kubectl explain  pod
+ 4097  kubectl explain  pod.kind
+ 4098  kubectl explain  pod.spec 
+ 4099  kubectl explain  pod.spec.containers
+ 4100  kubectl delete all --all
+ 4101  kubectl  get po 
+ 4102  kubectl  get po  -w
+ 4103  kubectl  get rc
+ 4104  kubectl  get  rs
+ 4105  kubectl  get  po
+ 4108  kubectl apply -f ashudep.yml
+ 4109  kubectl  get  deploy
+ 4110  kubectl expose deployment ashu-depweb  --type NodePort --port 1234 --target-port 80 --name ashusvc5 
+ 4111  kubectl  get  svc 
+ 4112  kubectl  get  rs 
+ 4114  kubectl  get deploy 
+ 4115  kubectl  get  svc 
+ 4116  kubectl  describe deployment  ashu-depweb  
+ 4117  kubectl  get deploy 
+ 4118  kubectl  get rs
+ 4119  kubectl  get deploy 
+ 4120  kubectl  scale deploy  ashu-depweb --replicas=3
+ 4121  kubectl  get deploy 
+ 4123  kubectl  get deploy 
+ 4124  kubectl  get po 
+ 4129  kubectl  describe deployment  ashu-depweb 
+ 4130  kubectl  set image  deployment  ashu-depweb jan2021=dockerashu/jan2021:webv2
+ 4132  kubectl  describe deployment  ashu-depweb 
+ 4134  kubectl  rollout history deployment ashu-depweb 
+ 4135  kubectl  describe deployment  ashu-depweb 
+ 4140  kubectl  set image  deployment  ashu-depweb jan2021=dockerashu/jan2021:webv3
+ 4141  kubectl  rollout history deployment ashu-depweb 
+ 4142  kubectl  describe deployment  ashu-depweb 
+ 4144  kubectl rollout  undo  deployment  ashu-depweb  --to-revesion=1
+ 4145  kubectl rollout  undo  deployment  ashu-depweb  --to-revision=1
+ 4153  kubectl  get deploy
+ 4154  kubectl  get svc 
+ 4166  kubectl  create deployment  ashudep2  --image=ashutoshhoracle.azurecr.io/alpine:v1 --dry-run=client -o yaml >private.yml
+ 4168  kubectl get deploy 
+ 4169  kubectl delete all --all
+ 4171  kubectl apply -f  private.yml
+ 4172  kubectl get  deploy 
+ 4173  kubectl get  po
+ 4174  kubectl describe   deploy  ashudep2 
+ 4175  kubectl describe   pod  ashudep2-7bbb4df4f5-4gwh7
+ 4177  kubectl  create  secret  
+ 4178  kubectl  create  secret  docker-registry  ashusec1  --docker-server=ashutoshhoracle.azurecr.io --docker-username=ashutoshhoracle    --docker-password=HIvugeQW6iedXRw79y8Iv9O9sJwR+Pia  
+ 4179  kubectl  get  secret 
+ 4181  kubectl  get  secret 
+ 4182  kubectl replace -f  private.yml --force 
+ 4183  kubectl explain pod.spec  |   grep -i imagepu
+ 4184  kubectl replace -f  private.yml --force 
+ 4185  kubectl  get  po 
+ 4186  kubectl replace -f  private.yml --force 
+ 4187  kubectl  get  po 
+ 4188  kubectl  logs  ashudep2-587474c959-thszw  
+ 4189  kubectl  logs  ashudep2-587474c959-thszw   -f
+ 4191  kubectl exec -it ashudep2-587474c959-thszw  sh 
+ 4192  kubectl exec -it ashudep2-587474c959-thszw --  sh 
+ 
+ ```
+ 
 
