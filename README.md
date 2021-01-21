@@ -369,3 +369,122 @@ sony-depweb-67bc9fb758-2fptx        1/1     Running   0          27s
 ```
 
 
+# Deployment 
+
+```
+❯ kubectl apply -f ashudep.yml
+deployment.apps/ashu-depweb created
+❯ kubectl  get  deploy
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+ashu-depweb   1/1     1            1           5s
+dhp-webapp    1/1     1            1           67s
+❯ kubectl expose deployment ashu-depweb  --type NodePort --port 1234 --target-port 80 --name ashusvc5
+service/ashusvc5 exposed
+❯ kubectl  get  svc
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+ashusvc5       NodePort    10.97.188.68    <none>        1234:30701/TCP   4s
+dhpsvc3-dep1   NodePort    10.104.223.82   <none>        2345:31896/TCP   68s
+kubernetes     ClusterIP   10.96.0.1       <none>        443/TCP          6m40s
+yogeshsvc1     NodePort    10.106.247.65   <none>        9876:30007/TCP   24s
+❯ kubectl  get  rs
+NAME                         DESIRED   CURRENT   READY   AGE
+ashu-depweb-54f9bb9fc4       1         1         1       2m11s
+dhp-webapp-767d45d94c        1         1         1       3m13s
+rajeev-deployweb-bd7f777c6   1         1         1       113s
+saurav-debweb-6b99859ff7     1         1         1       113s
+
+```
+## checking revesion number 
+
+```
+❯ kubectl  describe deployment  ashu-depweb
+Name:                   ashu-depweb
+Namespace:              default
+CreationTimestamp:      Thu, 21 Jan 2021 14:33:02 +0530
+Labels:                 app=ashu-depweb
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=ashu-depweb
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=ashu-depweb
+  Containers:
+
+
+```
+
+## scaling deployment 
+
+```
+❯ kubectl  scale deploy  ashu-depweb --replicas=3
+deployment.apps/ashu-depweb scaled
+❯ kubectl  get deploy
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+ashu-depweb        3/3     3            3           11m
+
+```
+
+## updating application version via image 
+
+```
+kubectl  set image  deployment  ashu-depweb jan2021=dockerashu/jan2021:webv2 
+
+```
+
+## checking version history 
+
+```
+❯ kubectl  rollout history deployment ashu-depweb
+deployment.apps/ashu-depweb 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+
+❯ kubectl  describe deployment  ashu-depweb
+Name:                   ashu-depweb
+Namespace:              default
+CreationTimestamp:      Thu, 21 Jan 2021 14:33:02 +0530
+Labels:                 app=ashu-depweb
+Annotations:            deployment.kubernetes.io/revision: 2
+Selector:               app=ashu-depweb
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+
+```
+
+## rolling back 
+
+```
+❯ kubectl rollout  undo  deployment  ashu-depweb  --to-revision=1
+deployment.apps/ashu-depweb rolled back
+
+```
+
+
+## deployment history 
+
+```
+ 4129* kubectl  describe deployment  ashu-depweb 
+ 4130* kubectl  set image  deployment  ashu-depweb jan2021=dockerashu/jan2021:webv2
+ 4131* history
+ 4132* kubectl  describe deployment  ashu-depweb 
+ 4133* history
+ 4134* kubectl  rollout history deployment ashu-depweb 
+ 4135* kubectl  describe deployment  ashu-depweb 
+ 4136* history
+ 4137  docker build  -t  dockerashu/jan2021:webv3  https://github.com/redashu/beginner-html-site-styled.git\#gh-pages
+ 4138  docker push dockerashu/jan2021:webv3
+ 4139  history
+ 4140  kubectl  set image  deployment  ashu-depweb jan2021=dockerashu/jan2021:webv3
+ 4141  kubectl  rollout history deployment ashu-depweb 
+ 4142  kubectl  describe deployment  ashu-depweb 
+❯ kubectl rollout  undo  deployment  ashu-depweb  --to-revesion=1
+
+```
+
+
+
