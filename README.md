@@ -259,4 +259,21 @@ ashusvc2        NodePort    10.111.38.236    <none>        1234:30101/TCP   23s
 
 ```
 
+## scaling pod using RC 
+
+```
+❯ kubectl  scale  rc  ashu-rc-1  --replicas=5
+replicationcontroller/ashu-rc-1 scaled
+❯ kubectl  get  rc  ashu-rc-1
+NAME        DESIRED   CURRENT   READY   AGE
+ashu-rc-1   5         5         5       22m
+❯ kubectl  scale  rc  ashu-rc-1  --replicas=2
+replicationcontroller/ashu-rc-1 scaled
+❯ kubectl  get  rc  ashu-rc-1
+NAME        DESIRED   CURRENT   READY   AGE
+ashu-rc-1   2         2         2       22m
+
+
+```
+
 
