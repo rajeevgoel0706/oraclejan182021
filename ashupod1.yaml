@@ -1,0 +1,19 @@
+apiVersion: v1 # this is my apiversion fo k8s
+kind: Pod 
+metadata:
+ namespace: ashu-space # name of namespace 
+ name: ashu-pod-1 # make sure unique pod name 
+ labels:
+   x: helloashu  # label of POD -- so that service can find it 
+spec:
+ imagePullSecret:
+ - name: ashusec1
+ containers:
+ - image: alpine
+   name: ashuc1 
+   command:
+   - /bin/sh
+   - -c
+   - ping fb.com
+   ports:
+   - containerPort: 80 # application port 

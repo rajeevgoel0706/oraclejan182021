@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashupod2
+  name: ashupod2
+spec:
+  volumes:
+  - name: ashuxc1
+    hostPath:
+     path: /etc
+     type: Directory
+  containers:
+  - image: nginx
+    name: ashupod2
+    volumeMounts:
+    - name: ashuxc1
+      mountPath: /mnt/hostetcbackup 
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
