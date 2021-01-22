@@ -143,4 +143,104 @@ spec:
    
 ```
 
+# VOlumes in k8s
+
+## EmptyDir volume 
+
+```
+kubectl  run  ashupod1  --image=alpine  --namespace ashu-space --dry-run=client -o yaml  >ashuemppod.yml
+
+```
+
+## yaml of EmptyDir type 
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashupod1
+  name: ashupod1
+  namespace: ashu-space
+spec:
+  nodeName: k8s-minion2 # scheduling pod in minion 2 
+  volumes: # creation of volumes 
+  - name: ashuvol1 # name of volume 
+    emptyDir: {} # type of Volume 
+  containers:
+  - image: alpine
+    name: ashupod1
+    volumeMounts:  # mount volume that we created above 
+    - name: ashuvol1  # name of volume
+      mountPath: /mnt/data  # path inside container 
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+```
+
+##  access the pod 
+
+```
+❯ kubectl exec -it ashupod1  -n ashu-space  -- sh
+/ # ps  -e
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sh -c while true;do date >>/mnt/data/time.txt; sleep 3;done
+   21 root      0:00 sleep 3
+   22 root      0:00 sh
+   28 root      0:00 ps -e
+/ # cd   /mnt/data/
+/mnt/data # ls
+time.txt
+/mnt/data # cat  time.txt 
+Fri Jan 22 06:30:32 UTC 2021
+Fri Jan 22 06:30:35 UTC 2021
+Fri Jan 22 06:30:38 UTC 2021
+Fri Jan 22 06:30:41 UTC 2021
+
+```
+
+## Pod with multiple container 
+
+<img src="multicpod.png">
+
+## multi Pod container 
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashupod1
+  name: ashupod1
+  namespace: ashu-space
+spec:
+  nodeName: k8s-minion2 # scheduling pod in minion 2 
+  volumes: # creation of volumes 
+  - name: ashuvol1 # name of volume 
+    emptyDir: {} # type of Volume 
+  containers:
+  - image: nginx 
+    name: ashuc2
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: ashuvol1
+      mountPath: /usr/share/nginx/html/ # app hosting location 
+  - image: alpine   #  helper container 
+    name: ashupod1  # name of container for data generation purpose 
+    command: ["/bin/sh","-c","while true;do date >>/mnt/data/index.html; sleep 3;done"] # parent process of container 
+    volumeMounts:  # mount volume that we created above 
+    - name: ashuvol1  # name of volume
+      mountPath: /mnt/data  # path inside container 
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+```
+
 
