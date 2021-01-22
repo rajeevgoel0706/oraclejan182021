@@ -294,4 +294,10 @@ status: {}
 
 ```
 
+# volume link of K8s
+
+['link'] ('https://kubernetes.io/docs/concepts/storage/volumes/')
+
+
+
 
