@@ -243,4 +243,55 @@ status: {}
 
 ```
 
+# HostPath 
+
+## Example Portainer 
+
+```
+kubectl  create deployment  ashuwebui --image=portainer/portainer --namespace ashu-space  --dry-run=client -o yaml >portainer.yaml
+
+```
+
+
+## portainer yaml 
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashuwebui
+  name: ashuwebui
+  namespace: ashu-space
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ashuwebui
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ashuwebui
+    spec:
+      volumes:
+      - name: ashuvolx1 # name of volume
+        hostPath:
+         path: /var/run/docker.sock # minion Node Mount Source 
+         type: Socket
+      containers:
+      - image: portainer/portainer
+        name: portainer
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+        - name: ashuvolx1
+          mountPath: /var/run/docker.sock # portainer mount path
+        resources: {}
+status: {}
+
+```
+
 
