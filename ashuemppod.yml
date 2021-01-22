@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashupod1
+  name: ashupod1
+  namespace: ashu-space
+spec:
+  nodeName: k8s-minion2 # scheduling pod in minion 2 
+  volumes: # creation of volumes 
+  - name: ashuvol1 # name of volume 
+    emptyDir: {} # type of Volume 
+  containers:
+  - image: nginx 
+    name: ashuc2
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: ashuvol1
+      mountPath: /usr/share/nginx/html/ # app hosting location 
+  - image: alpine   #  helper container 
+    name: ashupod1  # name of container for data generation purpose 
+    command: ["/bin/sh","-c","while true;do date >>/mnt/data/index.html; sleep 3;done"] # parent process of container 
+    volumeMounts:  # mount volume that we created above 
+    - name: ashuvol1  # name of volume
+      mountPath: /mnt/data  # path inside container 
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

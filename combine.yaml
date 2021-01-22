@@ -1,0 +1,39 @@
+# creating name space 
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: ashutest1
+
+#  creating POD 
+
+--- 
+apiVersion: v1
+kind: Pod
+metadata:
+ name: ashupod123
+ namespace: ashutest1
+ labels:
+  x: helloashu101
+spec:
+ containers:
+ - image: nginx
+   name: ashuc1
+   ports:
+   - containerPort: 80
+# creating service 
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: ashusvc111
+ namespace: ashutest1
+spec:
+ ports:
+ - name: ashuport
+   port: 1234
+   targetPort: 80
+   protocol: TCP
+ type: NodePort
+ selector:
+   x: helloashu101 
+   
